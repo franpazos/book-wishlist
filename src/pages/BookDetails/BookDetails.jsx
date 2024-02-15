@@ -31,10 +31,10 @@ const BookDetails = () => {
     return (
 
         <div className="book-details">
-            {beer && (
+            {book && (
                 <>
                     <img src={book.cover} alt="Book Cover" />
-                    <h3>{beer.title}</h3>
+                    <h3>{book.title}</h3>
 
                     {/* <button
                         className="btn btn-primary"
