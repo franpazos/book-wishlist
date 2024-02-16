@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import axios from "axios"
+import BookCard from "../../components/BookCards/BookCards"
 
 const API_BASE_URL = "http://localhost:5005/wishlist    "
 
@@ -21,10 +22,7 @@ function Wishlist() {
                 books.map((elm) => {
                     return (
                         <div className="bookCards" key={elm.id}>
-                            <h2>My Books</h2>
-                            <h3>{elm.title}</h3>
-                            <img src={elm.cover} alt="book-img" />
-                            <p>{elm.author.lastname}, {elm.author.name}</p>
+                           <BookCard {...elm}/>
                         </div>
                     )
                 }
