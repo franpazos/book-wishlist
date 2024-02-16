@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import axios from "axios"
 
-const API_BASE_URL = "http://localhost:5005/wishlist"
+const API_BASE_URL = "http://localhost:5005/wishlist    "
 
 function Wishlist() {
     const [books, setBooks] = useState([])
