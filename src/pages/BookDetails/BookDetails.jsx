@@ -1,6 +1,8 @@
+import "./BookDetails.css"
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams, Link, useNavigate } from "react-router-dom";
+import { Container, Row, Col } from "react-bootstrap";
 
 const API_BASE_URL = "http://localhost:5005"
 
@@ -30,24 +32,15 @@ const BookDetails = () => {
 
     return (
 
-        <div className="book-details">
-            {book && (
-                <>
-                    <img src={book.cover} alt="Book Cover" />
+        <Container >
+            <Row>
+                <Col>
+                    <img className="book-cover" src={book.cover} alt="Book Cover" />
                     <h3>{book.title}</h3>
+                </Col>
 
-                    {/* <button
-                        className="btn btn-primary"
-                        onClick={() => {
-                            navigate(-1);
-                        }}
-                    >
-                        Back
-                    </button> */}
-                </>
-            )}
-        </div>
-
+            </Row>
+        </Container>
     )
 }
 

@@ -1,5 +1,5 @@
 import './App.css'
-import Navbar from "./components/Navbar/Navbar.jsx"
+import NavBar from "./components/Navbar/Navbar.jsx"
 import AppRoutes from './routes/AppRoutes/AppRoutes.jsx'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
@@ -8,7 +8,7 @@ function App() {
   return (
     <div className='App'>
 
-      <Navbar />
+      <NavBar />
       <AppRoutes />
 
     </div>
