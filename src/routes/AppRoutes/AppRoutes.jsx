@@ -1,4 +1,3 @@
-import { Routes, Route } from 'react-router-dom'
 import Homepage from "./../../pages/HomePage/HomePage.jsx"
 import Wishlist from "./../../pages/Wishlist/Wishlist.jsx"
 import BookDetails from "./../../pages/BookDetails/BookDetails.jsx"
