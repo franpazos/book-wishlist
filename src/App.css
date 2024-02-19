@@ -1,5 +1,7 @@
+
 .App {
     background-color: #F9EFDB;
+    min-height: 100vh;
 }
 
 img {
