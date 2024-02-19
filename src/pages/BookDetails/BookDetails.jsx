@@ -2,7 +2,7 @@ import "./BookDetails.css"
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams, Link, useNavigate } from "react-router-dom";
-import { Container, Row, Col, Image, ToggleButton, ButtonGroup } from "react-bootstrap";
+import { Container, Row, Col, Image, ToggleButton, ButtonGroup, Button } from "react-bootstrap";
 
 const API_BASE_URL = "http://localhost:5005"
 
@@ -48,13 +48,13 @@ const BookDetails = () => {
 
         <Container>
 
-            <Row>
+            <Row className="mt-5">
 
                 <Col xs={6} md={4}>
                     <Image src={book.cover} alt="Book Cover" thumbnail className="book-cover" />
                 </Col>
 
-                <Col className="bookdetails">
+                <Col md={{ offset: 1 }} className="bookdetails">
 
                     <h3 className="title">{book.title}</h3>
                     <hr />
@@ -92,9 +92,11 @@ const BookDetails = () => {
 
                     </Row>
 
-                    <Row className="buttons">
+                    <hr />
 
-                        <Col>
+                    <Row className="mt-5">
+
+                        <Col md={{ span: 6, offset: 1 }}>
 
                             <ButtonGroup>
                                 {radios.map((radio, idx) => (
@@ -102,6 +104,7 @@ const BookDetails = () => {
                                         key={idx}
                                         id={`radio-${idx}`}
                                         type="radio"
+                                        size='lg'
                                         variant={idx % 2 ? 'outline-success' : 'outline-secondary'}
                                         name="radio"
                                         value={radio.value}
@@ -115,13 +118,28 @@ const BookDetails = () => {
 
                         </Col>
 
+                        <Col>
+
+                            <Button             //Hacer este botón en CSS. Con giro.
+                                size="lg"
+                                style={
+                                    {
+                                        backgroundColor: '#638889',
+                                        borderColor: '#638889'
+                                    }
+                                }>
+                                Write a review!
+                            </Button>
+
+                        </Col>
+
                     </Row>
 
                 </Col>
 
-            </Row>
+            </Row >
 
-        </Container>
+        </Container >
     )
 }
 
