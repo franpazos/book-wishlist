@@ -27,8 +27,8 @@ const BookDetails = () => {
     const updateBookStatus = () => {
         axios
             .put(`${API_BASE_URL}/wishlist/${bookId}`, {
-                currentlyReading: readStatus === 'true',
-                beenRead: readStatus === 'true'
+                currentlyReading: readStatus === 'reading',
+                beenRead: readStatus === 'read'
             })
             .then(() => {
                 loadBookStatus()
