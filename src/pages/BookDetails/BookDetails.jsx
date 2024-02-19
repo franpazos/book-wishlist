@@ -10,10 +10,9 @@ const BookDetails = () => {
 
     const [book, setBook] = useState([])
     const { bookId } = useParams()
-
     const navigate = useNavigate()
-
-    const [radioValue, setRadioValue] = useState(null);
+    const [radioValue, setRadioValue] = useState(null)  //Hace falta?
+    const [readStatus, setReadStatus] = useState(false)
 
     useEffect(() => loadBookDetails(), [])
 
@@ -22,6 +21,33 @@ const BookDetails = () => {
             .get(`${API_BASE_URL}/wishlist/${bookId}`)
             .then(({ data }) => setBook(data))
             .catch(err => console.log(err))
+    }
+
+
+    const updateBookStatus = () => {
+        axios
+            .put(`${API_BASE_URL}/wishlist/${bookId}`, {
+                currentlyReading: readStatus === 'true',
+                beenRead: readStatus === 'true'
+            })
+            .then(() => {
+                loadBookStatus()
+            })
+            .catch(err => console.log(err))
+    }
+
+    const loadBookStatus = () => {
+        axios
+            .get(`${API_BASE_URL}/wishlist/${bookId}`)
+            .then(({ data }) => {
+                setBook((prevBook) => ({
+                    ...prevBook,
+                    currentlyReading: data.currentlyReading,
+                    beenRead: data.beenRead,
+                }));
+                setRadioValue(data.currentlyReading ? 'reading' : data.beenRead ? 'read' : null);
+            })
+            .catch((err) => console.log(err))
     }
 
     const deleteBook = () => {
@@ -37,8 +63,8 @@ const BookDetails = () => {
     }
 
     const radios = [
-        { name: 'Reading', value: '1' },
-        { name: 'Read', value: '2' },
+        { name: 'Reading', value: 'reading' },
+        { name: 'Read', value: 'read' },
     ]
 
     const { name, lastName } = book.author || {}
@@ -109,7 +135,11 @@ const BookDetails = () => {
                                         name="radio"
                                         value={radio.value}
                                         checked={radioValue === radio.value}
-                                        onChange={(e) => setRadioValue(e.currentTarget.value)}
+                                        onChange={(e) => {
+                                            setRadioValue(e.currentTarget.value)
+                                            handleStatusChange(radio.value)
+                                            updateBookStatus()
+                                        }}
                                     >
                                         {radio.name}
                                     </ToggleButton>
@@ -129,6 +159,21 @@ const BookDetails = () => {
                                     }
                                 }>
                                 Write a review!
+                            </Button>
+
+                        </Col>
+
+                    </Row>
+
+                    <Row className="mt-5">
+
+                        <Col>
+
+                            <Button
+                                variant="danger"
+                                size="lg"
+                                onClick={deleteBook}>
+                                Delete this book from your Wishlist
                             </Button>
 
                         </Col>
