@@ -6,66 +6,54 @@ import { Container, Row, Col, Image, ToggleButton, ButtonGroup, Button } from "r
 
 const API_BASE_URL = "http://localhost:5005"
 
+// TODO: CREAR ESTADO DE CARGA
+
 const BookDetails = () => {
 
-    const [book, setBook] = useState([])
+    const [book, setBook] = useState({})
+    const [isLoading, setIsLoading] = useState(true)
     const { bookId } = useParams()
     const navigate = useNavigate()
-    const [radioValue, setRadioValue] = useState(null)  //Hace falta?
-    const [readStatus, setReadStatus] = useState(false)
 
     useEffect(() => loadBookDetails(), [])
+    useEffect(() => {
+        !isLoading && updateBookStatus()
+    }, [book.currentlyReading, book.beenRead])
 
     const loadBookDetails = () => {
         axios
             .get(`${API_BASE_URL}/wishlist/${bookId}`)
-            .then(({ data }) => setBook(data))
+            .then(({ data }) => {
+                setBook(data)
+                setIsLoading(false)
+            })
             .catch(err => console.log(err))
     }
+
+    const handleReadingStatus = (e) => {
+        const { name } = e.target
+        setBook((prevBook) => ({
+            ...prevBook,
+            currentlyReading: name === 'currentlyReading' ? true : false,
+            beenRead: name === 'beenRead' ? true : false,
+        }))
+    }
+
 
 
     const updateBookStatus = () => {
         axios
-            .put(`${API_BASE_URL}/wishlist/${bookId}`, {
-                currentlyReading: readStatus === 'true',
-                beenRead: readStatus === 'true'
-            })
-            .then(() => {
-                loadBookStatus()
-            })
+            .put(`${API_BASE_URL}/wishlist/${bookId}`, book)
+            .then(() => console.log('ACTUALIZADO'))
             .catch(err => console.log(err))
     }
 
-    const loadBookStatus = () => {
-        axios
-            .get(`${API_BASE_URL}/wishlist/${bookId}`)
-            .then(({ data }) => {
-                setBook((prevBook) => ({
-                    ...prevBook,
-                    currentlyReading: data.currentlyReading,
-                    beenRead: data.beenRead,
-                }));
-                setRadioValue(data.currentlyReading ? 'reading' : data.beenRead ? 'read' : null);
-            })
-            .catch((err) => console.log(err))
-    }
-
     const deleteBook = () => {
-
         axios
             .delete(`${API_BASE_URL}/wishlist/${bookId}`)
             .then(() => navigate('/wishlist'))
             .catch(err => console.log(err))
     }
-
-    const handleStatusChange = (status) => {
-        setReadStatus(status)
-    }
-
-    const radios = [
-        { name: 'Reading', value: 'reading' },
-        { name: 'Read', value: 'read' },
-    ]
 
     const { name, lastName } = book.author || {}
     const { publisher, year } = book.publishSpecs || {}
@@ -96,9 +84,11 @@ const BookDetails = () => {
                             <div className="genres">
                                 <strong>Genres:</strong>
                                 <ul>
-                                    {book.genres && book.genres.map((genre, index) => (
-                                        <li key={index}>{genre}</li>
-                                    ))}
+                                    {
+                                        book.genres?.map((genre, index) => (
+                                            <li key={index}>{genre}</li>
+                                        ))
+                                    }
                                 </ul>
                             </div>
 
@@ -108,9 +98,11 @@ const BookDetails = () => {
                             <div className="awards">
                                 <strong>Awards:</strong>
                                 <ul>
-                                    {book.awards && book.awards.map((awards, index) => (
-                                        <li key={index}>{awards}</li>
-                                    ))}
+                                    {
+                                        book.awards?.map((awards, index) => (
+                                            <li key={index}>{awards}</li>
+                                        ))
+                                    }
                                 </ul>
                             </div>
 
@@ -122,28 +114,28 @@ const BookDetails = () => {
 
                     <Row className="mt-5">
 
-                        <Col md={{ span: 6, offset: 1 }}>
+                        <Col md={{ span: 6 }}>
 
                             <ButtonGroup>
-                                {radios.map((radio, idx) => (
-                                    <ToggleButton
-                                        key={idx}
-                                        id={`radio-${idx}`}
-                                        type="radio"
-                                        size='lg'
-                                        variant={idx % 2 ? 'outline-success' : 'outline-secondary'}
-                                        name="radio"
-                                        value={radio.value}
-                                        checked={radioValue === radio.value}
-                                        onChange={(e) => {
-                                            setRadioValue(e.currentTarget.value)
-                                            handleStatusChange(radio.value)
-                                            updateBookStatus()
-                                        }}
-                                    >
-                                        {radio.name}
-                                    </ToggleButton>
-                                ))}
+
+                                <Button
+                                    variant={book.currentlyReading ? 'success' : 'secondary'}
+                                    size="lg"
+                                    name="currentlyReading"
+                                    onClick={handleReadingStatus}
+                                >
+                                    Reading
+                                </Button>
+
+                                <Button
+                                    variant={book.beenRead ? 'success' : 'secondary'}
+                                    size="lg"
+                                    name="beenRead"
+                                    onClick={handleReadingStatus}
+                                >
+                                    Read
+                                </Button>
+
                             </ButtonGroup>
 
                         </Col>
