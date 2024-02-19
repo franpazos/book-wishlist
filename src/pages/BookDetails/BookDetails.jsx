@@ -6,7 +6,6 @@ import { Container, Row, Col, Image, ToggleButton, ButtonGroup, Button } from "r
 
 const API_BASE_URL = "http://localhost:5005"
 
-// TODO: CREAR ESTADO DE CARGA
 
 const BookDetails = () => {
 
