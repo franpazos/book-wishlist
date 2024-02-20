@@ -3,6 +3,8 @@ import axios from "axios"
 import { useState } from 'react'
 import { useNavigate } from "react-router-dom"
 import { Container, Button, Form, Row, Col, InputGroup } from "react-bootstrap"
+import { GENRES } from '../../consts/book.constants'
+import { handleNewGenre } from '../../utils/book.utils'
 
 const API_BASE_URL = "http://localhost:5005"
 
@@ -50,20 +52,28 @@ export default function NewBookForm() {
 
     const handleInputChange = e => {
         const { value, name } = e.target
-        setBookData((prevBook) => {
-            const nestedData = { ...prevBook }
-            const nameArray = name.split('.')
-            const updatedNestedData = nameArray.reduce((acc, key, index) => {
-                if (index === nameArray.length - 1) {
-                    acc[key] = value
-                } else {
-                    acc[key] = { ...acc[key] }
-                }
-                return acc[key]
-            }, nestedData)
+        setBookData({ ...bookData, [name]: value })
+    }
 
-            return { ...prevBook, ...updatedNestedData }
+    const handleAuthorDetailsChange = e => {
+        const { value, name } = e.target
+        setBookData({
+            ...bookData,
+            author: { ...bookData.author, [name]: value }
         })
+    }
+
+    const handlePublishSpecsChange = e => {
+        const { value, name } = e.target
+        setBookData({
+            ...bookData,
+            publishSpecs: { ...bookData.publishSpecs, [name]: value }
+        })
+    }
+
+    const handleGenreChange = (genre, checked) => {
+        const updatedGenres = handleNewGenre(checked, genre, [...bookData.genres])
+        setBookData({ ...bookData, genres: updatedGenres });
     }
 
     return (
@@ -82,49 +92,45 @@ export default function NewBookForm() {
 
             <div className='author-details'>
 
-                <Row className="mb-2">
+                <h3>Author's information</h3>
 
-                    <h3>Author's information</h3>
+                <InputGroup className="mt-3" as={Col} controlId="authorName">
+                    <InputGroup.Text>First and Last Name</InputGroup.Text>
+                    <Form.Control
+                        type="text"
+                        aria-label="First name"
+                        value={bookData.author.name}
+                        onChange={handleAuthorDetailsChange}
+                        name={'name'} />
+                    <Form.Control
+                        type="text"
+                        aria-label="Last name"
+                        value={bookData.author.lastName}
+                        onChange={handleAuthorDetailsChange}
+                        name={'lastName'} />
+                </InputGroup>
 
-                    <InputGroup className="mt-3" as={Col} controlId="authorName">
-                        <InputGroup.Text>First and Last Name</InputGroup.Text>
-                        <Form.Control
-                            type="text"
-                            aria-label="First name"
-                            value={bookData.author.name}
-                            onChange={handleInputChange}
-                            name={'author.name'} />
-                        <Form.Control
-                            type="text"
-                            aria-label="Last name"
-                            value={bookData.author.lastName}
-                            onChange={handleInputChange}
-                            name={'author.lastName'} />
-                    </InputGroup>
+                <hr />
 
-                </Row>
+                <Form.Group as={Col} controlId="authorCountry">
+                    <Form.Control
+                        type="text"
+                        placeholder="Which country is the author from?"
+                        value={bookData.author.country}
+                        onChange={handleAuthorDetailsChange}
+                        name={'country'} />
+                </Form.Group>
 
-                <Row className="mb-5">
+                <Form.Group as={Col} controlId="authorBirth">
+                    <Form.Control
+                        type="number"
+                        placeholder="When were they born?"
+                        value={bookData.author.birth}
+                        onChange={handleAuthorDetailsChange}
+                        name={'birth'} />
+                </Form.Group>
 
-                    <Form.Group as={Col} controlId="authorCountry">
-                        <Form.Control
-                            type="text"
-                            placeholder="Which country is the author from?"
-                            value={bookData.author.country}
-                            onChange={handleInputChange}
-                            name={'author.country'} />
-                    </Form.Group>
-
-                    <Form.Group as={Col} controlId="authorBirth">
-                        <Form.Control
-                            type="number"
-                            placeholder="When were they born?"
-                            value={bookData.author.birth}
-                            onChange={handleInputChange}
-                            name={'author.birth'} />
-                    </Form.Group>
-
-                </Row>
+                <hr />
 
                 <Row className="mb-2">
 
@@ -134,37 +140,35 @@ export default function NewBookForm() {
                             type="switch"
                             id="nobel-switch"
                             value={bookData.author.nobelAwarded}
-                            onChange={handleInputChange}
-                            name={'author.nobelAwarded'} />
+                            onChange={handleAuthorDetailsChange}
+                            name={'nobelAwarded'} />
                     </Col>
 
                 </Row>
 
             </div>
 
-            <Row className="mb-3">
 
-                <Form.Group as={Col} controlId="publisher">
-                    <Form.Label>Publisher</Form.Label>
-                    <Form.Control
-                        type="text"
-                        placeholder="Who published your edition?"
-                        value={bookData.publishSpecs.publisher}
-                        onChange={handleInputChange}
-                        name={'publishSpecs.publisher'} />
-                </Form.Group>
+            <Form.Group as={Col} controlId="publisher">
+                <Form.Label>Publisher</Form.Label>
+                <Form.Control
+                    type="text"
+                    placeholder="Who published your edition?"
+                    value={bookData.publishSpecs.publisher}
+                    onChange={handlePublishSpecsChange}
+                    name={'publisher'} />
+            </Form.Group>
 
-                <Form.Group as={Col} controlId="year">
-                    <Form.Label>Year</Form.Label>
-                    <Form.Control
-                        type="number"
-                        placeholder="What year was the book published?"
-                        value={bookData.publishSpecs.year}
-                        onChange={handleInputChange}
-                        name={'publishSpecs.year'} />
-                </Form.Group>
+            <Form.Group as={Col} controlId="year">
+                <Form.Label>Year</Form.Label>
+                <Form.Control
+                    type="number"
+                    placeholder="What year was the book published?"
+                    value={bookData.publishSpecs.year}
+                    onChange={handlePublishSpecsChange}
+                    name={'year'} />
+            </Form.Group>
 
-            </Row>
 
             <Form.Group className="mb-3" controlId="description">
                 <Form.Label>Description</Form.Label>
@@ -186,207 +190,91 @@ export default function NewBookForm() {
                     name={'cover'} />
             </Form.Group>
 
-            <Row className="mb-3">
 
-                <Form.Group as={Col} controlId="formGridPages">
-                    <Form.Label>Pages</Form.Label>
-                    <Form.Control
-                        type="text"
-                        placeholder="Number of pages"
-                        value={bookData.pages}
-                        onChange={handleInputChange}
-                        name={'pages'} />
-                </Form.Group>
+            <Form.Group as={Col} controlId="formGridPages">
+                <Form.Label>Pages</Form.Label>
+                <Form.Control
+                    type="text"
+                    placeholder="Number of pages"
+                    value={bookData.pages}
+                    onChange={handleInputChange}
+                    name={'pages'} />
+            </Form.Group>
 
-                <Form.Group as={Col} controlId="language">
-                    <Form.Label>Language</Form.Label>
-                    <Form.Select
-                        defaultValue="Choose..."
-                        value={bookData.language}
-                        onChange={handleInputChange}
-                        name={'language'} >
+            <Form.Group as={Col} controlId="language">
+                <Form.Label>Language</Form.Label>
+                <Form.Select
+                    defaultValue="Choose..."
+                    value={bookData.language}
+                    onChange={handleInputChange}
+                    name={'language'} >
 
-                        <option>Spanish</option>
-                        <option>English</option>
-                        <option>Italian</option>
-                        <option>French</option>
+                    <option>Spanish</option>
+                    <option>English</option>
+                    <option>Italian</option>
+                    <option>French</option>
 
-                    </Form.Select>
-                </Form.Group>
+                </Form.Select>
+            </Form.Group>
 
-            </Row>
 
-            <Row className='mt-4'>
 
-                <h4>Choose all the genres it belongs to:</h4>
+            <h4>Choose all the genres it belongs to:</h4>
 
-                <Form.Group className="mb-3" id="genres">
-                    <div key="inline-checkbox" className='checkbox'>
-                        <Form.Check
-                            inline
-                            label="Fiction"
-                            type="checkbox"
-                            id="inline-checkbox-1"
-                            value={bookData.genres}
-                            onChange={handleInputChange}
-                            name={'genres'} />
-                        <Form.Check
-                            inline
-                            label="Non-Fiction"
-                            name="genres"
-                            type="checkbox"
-                            id="inline-checkbox-3"
-                        />
-                        <Form.Check
-                            inline
-                            label="Historic"
-                            name="genres"
-                            type="checkbox"
-                            id="inline-checkbox-2"
-                        />
-                        <Form.Check
-                            inline
-                            label="Fantasy"
-                            name="genres"
-                            type="checkbox"
-                            id="inline-checkbox-3"
-                        />
-                        <Form.Check
-                            inline
-                            label="Mystery"
-                            name="genres"
-                            type="checkbox"
-                            id="inline-checkbox-3"
-                        />
-                        <Form.Check
-                            inline
-                            label="Comics"
-                            name="genres"
-                            type="checkbox"
-                            id="inline-checkbox-3"
-                        />
-                        <Form.Check
-                            inline
-                            label="Classic"
-                            name="genres"
-                            type="checkbox"
-                            id="inline-checkbox-3"
-                        />
-                        <Form.Check
-                            inline
-                            label="Poetry"
-                            name="genres"
-                            type="checkbox"
-                            id="inline-checkbox-3"
-                        />
-                        <Form.Check
-                            inline
-                            label="Romance"
-                            name="genres"
-                            type="checkbox"
-                            id="inline-checkbox-3"
-                        />
-                        <Form.Check
-                            inline
-                            label="Horror"
-                            name="genres"
-                            type="checkbox"
-                            id="inline-checkbox-3"
-                        />
-                        <Form.Check
-                            inline
-                            label="Drama"
-                            name="genres"
-                            type="checkbox"
-                            id="inline-checkbox-3"
-                        />
-                        <Form.Check
-                            inline
-                            label="Young Adult"
-                            name="genres"
-                            type="checkbox"
-                            id="inline-checkbox-3"
-                        />
-                        <Form.Check
-                            inline
-                            label="Humor"
-                            name="genres"
-                            type="checkbox"
-                            id="inline-checkbox-3"
-                        />
-                        <Form.Check
-                            inline
-                            label="Science"
-                            name="genres"
-                            type="checkbox"
-                            id="inline-checkbox-3"
-                        />
-                        <Form.Check
-                            inline
-                            label="LGTBI"
-                            name="genres"
-                            type="checkbox"
-                            id="inline-checkbox-3"
-                        />
-                        <Form.Check
-                            inline
-                            label="Self Help"
-                            name="genres"
-                            type="checkbox"
-                            id="inline-checkbox-3"
-                        />
-                        <Form.Check
-                            inline
-                            label="Philosophy"
-                            name="genres"
-                            type="checkbox"
-                            id="inline-checkbox-3"
-                        />
-                        <Form.Check
-                            inline
-                            label="Biography"
-                            name="genres"
-                            type="checkbox"
-                            id="inline-checkbox-3"
-                        />
-                    </div>
-                </Form.Group>
+            <Form.Group className="mb-3" controlId="genres">
 
-            </Row>
+                {
+                    GENRES.map((genre, index) => (
+                        <Form.Check
+                            key={index}
+                            inline
+                            type="checkbox"
+                            label={genre.label}
+                            name={genre.name}
+                            id={`inline-checkbox-${index}`}
+                            value={bookData.genres.includes(genre)}
+                            onChange={handleGenreChange}
+                        />
+                    ))
+                }
 
-            <Row className='mt-4 mb-5'>
+            </Form.Group>
 
-                <h4>Has this book won any awards? Add up to three:</h4>
 
-                <Form.Group as={Col} controlId="awards">
-                    <Form.Control
-                        type="text"
-                        value={bookData.awards}
-                        onChange={handleInputChange}
-                        name={'awards'} />
-                    <Form.Control
-                        type="text"
-                        value={bookData.awards}
-                        onChange={handleInputChange}
-                        name={'awards'} />
-                    <Form.Control
-                        type="text"
-                        value={bookData.awards}
-                        onChange={handleInputChange}
-                        name={'awards'} />
-                </Form.Group>
+            <h4>Has this book won any awards? Add up to three:</h4>
 
-            </Row>
+            <Form.Group as={Col} controlId="awards">
 
-            <Row className="d-grid gap-2">
+                <Form.Control
+                    type="text"
+                    value={bookData.awards[0]}
+                    onChange={handleInputChange}
+                    name={'awards-0'} />
+            </Form.Group>
 
-                <Button variant="success" size="lg" type="submit">
-                    Add new book
-                </Button>
+            <Form.Group as={Col} controlId="awards">
+                <Form.Control
+                    type="text"
+                    value={bookData.awards[1]}
+                    onChange={handleInputChange}
+                    name={'awards-1'} />
+            </Form.Group>
 
-            </Row>
+            <Form.Group as={Col} controlId="awards">
+                <Form.Control
+                    type="text"
+                    value={bookData.awards[2]}
+                    onChange={handleInputChange}
+                    name={'awards-2'} />
 
-        </Form>
+            </Form.Group>
+
+
+            <Button variant="success" size="lg" type="submit">
+                Add new book
+            </Button>
+
+        </Form >
 
     )
 
