@@ -34,3 +34,8 @@
     border: 1px solid #638889;
     color: #638889;
 }
+
+.error .link-style{
+    text-decoration: none;
+    color: inherit;
+}

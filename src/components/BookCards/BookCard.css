@@ -25,4 +25,18 @@
 .Bookcard .card-text {
     margin-top: auto;
     font-style: italic;
+    display: flex;
+    justify-content: space-between;
+}
+
+.Bookcard .button-style{
+        background-color: #638889;
+        border: 1px solid #638889;
+        color: #F9EFDB;
+}
+
+.Bookcard .button-style:hover {
+    background-color: #F9EFDB;
+    border: 1px solid #638889;
+    color: #638889;
 }

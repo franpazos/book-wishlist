@@ -8,3 +8,8 @@ font-weight: bolder;
     display: flex;
     height: 100%;
 }
+
+.link-class {
+    text-decoration: none;
+    color:inherit
+}
