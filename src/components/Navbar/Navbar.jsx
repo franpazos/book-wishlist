@@ -38,6 +38,7 @@ const NavBar = () => {
                                 placeholder="Search"
                                 className="me-2"
                                 aria-label="Search"
+                                controlId="search"
                             />
                             <Button variant="outline-success">Search</Button>
                         </Form>
