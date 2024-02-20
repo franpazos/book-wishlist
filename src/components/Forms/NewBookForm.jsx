@@ -56,10 +56,11 @@ export default function NewBookForm() {
     }
 
     const handleAuthorDetailsChange = e => {
-        const { value, name } = e.target
+        const { value, name, checked } = e.target
+        const updatedValue = name === "nobelAwarded" ? checked : value;
         setBookData({
             ...bookData,
-            author: { ...bookData.author, [name]: value }
+            author: { ...bookData.author, [name]: updatedValue }
         })
     }
 
