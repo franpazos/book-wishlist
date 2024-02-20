@@ -57,7 +57,7 @@ export default function NewBookForm() {
 
     const handleAuthorDetailsChange = e => {
         const { value, name, checked } = e.target
-        const updatedValue = name === "nobelAwarded" ? checked : value;
+        const updatedValue = name === "nobelAwarded" ? checked : value
         setBookData({
             ...bookData,
             author: { ...bookData.author, [name]: updatedValue }
@@ -75,7 +75,17 @@ export default function NewBookForm() {
     const handleGenreChange = (event) => {
         const { name, checked } = event.target
         const updatedGenres = handleNewGenre(checked, name, [...bookData.genres])
-        setBookData({ ...bookData, genres: updatedGenres });
+        setBookData({ ...bookData, genres: updatedGenres })
+    }
+
+    const handleAwardsChange = (e, index) => {
+        const { value } = e.target
+        const updatedAwards = [...bookData.awards]
+        updatedAwards[index] = value
+        setBookData({
+            ...bookData,
+            awards: updatedAwards,
+        })
     }
 
     return (
@@ -245,31 +255,16 @@ export default function NewBookForm() {
 
             <h4>Has this book won any awards? Add up to three:</h4>
 
-            <Form.Group as={Col} controlId="awards">
-
-                <Form.Control
-                    type="text"
-                    value={bookData.awards[0]}
-                    onChange={handleInputChange}
-                    name={'awards-0'} />
-            </Form.Group>
-
-            <Form.Group as={Col} controlId="awards">
-                <Form.Control
-                    type="text"
-                    value={bookData.awards[1]}
-                    onChange={handleInputChange}
-                    name={'awards-1'} />
-            </Form.Group>
-
-            <Form.Group as={Col} controlId="awards">
-                <Form.Control
-                    type="text"
-                    value={bookData.awards[2]}
-                    onChange={handleInputChange}
-                    name={'awards-2'} />
-
-            </Form.Group>
+            {[0, 1, 2].map((awardIndex) => (
+                <Form.Group as={Col} controlId={`awards-${awardIndex}`} key={awardIndex}>
+                    <Form.Control
+                        type="text"
+                        value={bookData.awards[awardIndex]}
+                        onChange={(e) => handleAwardsChange(e, awardIndex)}
+                        name={`awards-${awardIndex}`}
+                    />
+                </Form.Group>
+            ))}
 
 
             <Button variant="success" size="lg" type="submit">
