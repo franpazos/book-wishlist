@@ -71,8 +71,9 @@ export default function NewBookForm() {
         })
     }
 
-    const handleGenreChange = (genre, checked) => {
-        const updatedGenres = handleNewGenre(checked, genre, [...bookData.genres])
+    const handleGenreChange = (event) => {
+        const { name, checked } = event.target
+        const updatedGenres = handleNewGenre(checked, name, [...bookData.genres])
         setBookData({ ...bookData, genres: updatedGenres });
     }
 
@@ -232,7 +233,7 @@ export default function NewBookForm() {
                             label={genre.label}
                             name={genre.name}
                             id={`inline-checkbox-${index}`}
-                            value={bookData.genres.includes(genre)}
+                            value={bookData.genres.includes(genre.name)}
                             onChange={handleGenreChange}
                         />
                     ))
