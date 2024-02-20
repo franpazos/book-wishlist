@@ -1,0 +1,28 @@
+.Bookcard{
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    margin-bottom: 20px;
+}
+
+.Bookcard .card-img-top {
+    padding: 10px;
+    background-color: #F9EFDB
+}
+
+.Bookcard .card-body {
+    display: flex;
+    flex-direction: column;
+    color: #638889;
+    font-family: sans-serif;
+    background-color: #F9EFDB;
+    padding: 10px;
+}
+
+.Bookcard .card-title {
+    flex-direction: column;
+    font-size:larger;
+}
+
+.Bookcard .card-text {
+    margin-top: auto;
+    font-style: italic;
+}

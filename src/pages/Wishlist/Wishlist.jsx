@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react"
 import axios from "axios"
 import BookCard from "../../components/BookCards/BookCards"
+import { Row, Col, Container } from "react-bootstrap";
+import "./Wishlist.css"
 
 const API_BASE_URL = "http://localhost:5005/wishlist    "
 
@@ -18,16 +20,22 @@ function Wishlist() {
     return (
         <div className="Wishlist">
             <h1>My Book Wishlist</h1>
+                <Container>
+                <Row>
             {
                 books.map((elm) => {
                     return (
-                        <div className="bookCards" key={elm.id}>
+                        <Col key={elm.id} lg={3} md={6}>
+                         <article className="bookCards">
                            <BookCard {...elm}/>
-                        </div>
+                        </article>
+                        </Col>
                     )
                 }
                 )
             }
+            </Row>
+            </Container>
         </div>
     )
 }

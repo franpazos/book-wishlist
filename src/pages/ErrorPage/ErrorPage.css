@@ -1,0 +1,36 @@
+.error{
+    color: #638889;
+    font-family: sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.error img {
+    width: 400px;
+    margin: 10px;
+    padding: 50px;
+    align-items: center;
+}
+
+.error-page .card-body{
+    font-weight: bold;
+    padding: 20px 0px;
+}
+
+.text-only h2 {
+    font-weight: bold;
+    padding: 20px 0px;
+}
+
+.error .home-btn{
+    background-color: #638889;
+    border: 1px solid #638889;
+    color: #F9EFDB
+}
+
+.error .home-btn:hover {
+    background-color: #F9EFDB;
+    border: 1px solid #638889;
+    color: #638889;
+}
