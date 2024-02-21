@@ -4,6 +4,8 @@ import axios from "axios"
 import { useParams } from "react-router-dom"
 import { Container, Row, Col, Image, ButtonGroup, Button } from "react-bootstrap"
 import DeleteModal from "../../components/Modals/DeleteModal"
+import ReviewModal from "../../components/Modals/ReviewModal"
+import StarRatings from "react-star-ratings"
 
 const API_BASE_URL = "http://localhost:5005"
 
@@ -13,6 +15,8 @@ const BookDetails = () => {
     const [book, setBook] = useState({})
     const [isLoading, setIsLoading] = useState(true)
     const [modalShow, setModalShow] = useState(false)
+    const [reviewModalShow, setReviewModalShow] = useState(false)
+
     const { bookId } = useParams()
 
     useEffect(() => loadBookDetails(), [])
@@ -48,6 +52,7 @@ const BookDetails = () => {
 
     const { name, lastName } = book.author || {}
     const { publisher, year } = book.publishSpecs || {}
+    const { rating, comment } = book.reviewData || {}
 
     return (
 
@@ -57,6 +62,19 @@ const BookDetails = () => {
 
                 <Col xs={6} md={4}>
                     <Image src={book.cover} alt="Book Cover" thumbnail className="book-cover" />
+
+                    <div className="rating">
+                        <h3>Your rating:</h3>
+
+                        <StarRatings
+                            rating={rating}
+                            starRatedColor="green"
+                            numberOfStars={5}
+                            name="rating"
+                            starDimension="22px"
+                        />
+                    </div>
+
                 </Col>
 
                 <Col md={{ offset: 1 }} className="bookdetails">
@@ -134,6 +152,7 @@ const BookDetails = () => {
                         <Col>
 
                             <Button
+                                onClick={() => setReviewModalShow(true)}
                                 size="lg"
                                 style={
                                     {
@@ -143,6 +162,11 @@ const BookDetails = () => {
                                 }>
                                 Write a review!
                             </Button>
+
+                            <ReviewModal
+                                show={reviewModalShow}
+                                onHide={() => setReviewModalShow(false)}
+                                book={book} />
 
                         </Col>
 
