@@ -4,12 +4,12 @@ font-family: sans-serif;
 font-weight: bolder;
 }
 
-.bookCards {
+.bookCards{
     display: flex;
     height: 100%;
 }
 
 .link-class {
     text-decoration: none;
-    color:inherit
+    color:inherit;
 }

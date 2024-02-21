@@ -13,7 +13,7 @@ const HomePage = () => {
             <h1>Add a new book to your Wishlist!</h1>
 
             <Container>
-                <NewBookForm />
+
             </Container>
 
 
