@@ -5,21 +5,22 @@
 
 .Bookcard .card-img-top {
     padding: 10px;
-    background-color: #F9EFDB
+    background-color:#EBD9B4;
 }
 
 .Bookcard .card-body {
-    display: flex;
     flex-direction: column;
+    display: flex;
     color: #638889;
     font-family: sans-serif;
-    background-color: #F9EFDB;
+    background-color: #EBD9B4;
     padding: 10px;
 }
 
 .Bookcard .card-title {
-    flex-direction: column;
     font-size:larger;
+    display: flex;
+    flex-direction: column;
 }
 
 .Bookcard .card-text {
@@ -29,14 +30,10 @@
     justify-content: space-between;
 }
 
-.Bookcard .button-style{
-        background-color: #638889;
-        border: 1px solid #638889;
-        color: #F9EFDB;
+.bookCards .closebutton-style{
+        color: #EBD9B4;
 }
 
-.Bookcard .button-style:hover {
-    background-color: #F9EFDB;
-    border: 1px solid #638889;
+.bookCards .closebutton-style:hover {
     color: #638889;
 }
