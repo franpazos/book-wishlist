@@ -1,6 +1,6 @@
-import { CloseButton, Card } from "react-bootstrap";
+import { CloseButton, Card } from "react-bootstrap"
 import "./BookCard.css"
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"
 
 const BookCard = ({ id, title, cover, author, removeCard }) => {
 
