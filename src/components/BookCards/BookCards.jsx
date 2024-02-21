@@ -1,8 +1,8 @@
-import { CloseButton, Card } from "react-bootstrap"
+import { CloseButton, Card, Button } from "react-bootstrap"
 import "./BookCard.css"
 import { Link } from "react-router-dom"
 
-const BookCard = ({ id, title, cover, author, removeCard }) => {
+const BookCard = ({ id, title, cover, author, removeCard, beenRead, currentlyReading }) => {
 
     const { name, lastName } = author;
 
@@ -15,7 +15,10 @@ const BookCard = ({ id, title, cover, author, removeCard }) => {
             <Card.Body>
               <Card.Title>{title}</Card.Title>
               <Card.Text>
-                by {name} {lastName}
+                <div className="author-read">by {name} {lastName} 
+                {beenRead ? <p>Read ✓</p> : null}
+                {currentlyReading ? <p>Work in Progress 🛠 </p> : null}
+                </div>
               </Card.Text>
             </Card.Body>
             </Link>

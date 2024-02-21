@@ -23,6 +23,7 @@ const SearchBar = () => {
             .catch(err => console.log(err))
     }
     
+    
     return(
         <div className="SearchBar">
             <Form>
@@ -37,8 +38,9 @@ const SearchBar = () => {
                     results.map(elm => {
                         return (
                             <Link key={elm.id} to={`/wishlist/${elm.id}`}  className="link-style">
-                                <ListGroup.Item><img src={elm.cover} alt="book-img"/></ListGroup.Item>
-                                <ListGroup.Item>{elm.title}</ListGroup.Item>
+                                <ListGroup.Item>
+                                <div  className="img-title"><img src={elm.cover} alt="book-img"/>{elm.title}</div>
+                                </ListGroup.Item>
                             </Link>
                         )
                     })

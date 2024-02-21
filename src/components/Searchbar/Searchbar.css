@@ -4,6 +4,19 @@
 
 .link-style{
     text-decoration: none;
-    color: #638889;
     font-family: sans-serif;
+    text-align: left;
 }
+
+.img-title{
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.img-title img{
+    width: 60px;
+    padding: 10px;
+}
+
+
