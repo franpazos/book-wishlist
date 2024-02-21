@@ -1,8 +1,9 @@
 import "./BookDetails.css"
-import { useState, useEffect } from "react";
-import axios from "axios";
-import { useParams, Link, useNavigate } from "react-router-dom";
-import { Container, Row, Col, Image, ToggleButton, ButtonGroup, Button } from "react-bootstrap";
+import { useState, useEffect } from "react"
+import axios from "axios"
+import { useParams } from "react-router-dom"
+import { Container, Row, Col, Image, ButtonGroup, Button } from "react-bootstrap"
+import DeleteModal from "../../components/Modals/DeleteModal"
 
 const API_BASE_URL = "http://localhost:5005"
 
@@ -11,8 +12,8 @@ const BookDetails = () => {
 
     const [book, setBook] = useState({})
     const [isLoading, setIsLoading] = useState(true)
+    const [modalShow, setModalShow] = useState(false)
     const { bookId } = useParams()
-    const navigate = useNavigate()
 
     useEffect(() => loadBookDetails(), [])
     useEffect(() => {
@@ -38,19 +39,10 @@ const BookDetails = () => {
         }))
     }
 
-
-
     const updateBookStatus = () => {
         axios
             .put(`${API_BASE_URL}/wishlist/${bookId}`, book)
             .then(() => console.log('ACTUALIZADO'))
-            .catch(err => console.log(err))
-    }
-
-    const deleteBook = () => {
-        axios
-            .delete(`${API_BASE_URL}/wishlist/${bookId}`)
-            .then(() => navigate('/wishlist'))
             .catch(err => console.log(err))
     }
 
@@ -141,7 +133,7 @@ const BookDetails = () => {
 
                         <Col>
 
-                            <Button             //Hacer este botón en CSS. Con giro.
+                            <Button
                                 size="lg"
                                 style={
                                     {
@@ -163,9 +155,15 @@ const BookDetails = () => {
                             <Button
                                 variant="danger"
                                 size="lg"
-                                onClick={deleteBook}>
-                                Delete this book from your Wishlist
+                                onClick={() => setModalShow(true)}>
+                                Delete
                             </Button>
+
+                            <DeleteModal
+                                show={modalShow}
+                                onHide={() => setModalShow(false)}
+                                bookId={bookId}
+                            />
 
                         </Col>
 
