@@ -2,7 +2,7 @@ import './NewBookForm.css'
 import axios from "axios"
 import { useState } from 'react'
 import { useNavigate } from "react-router-dom"
-import { Container, Button, Form, Row, Col, InputGroup } from "react-bootstrap"
+import { Button, Form, Row, Col, InputGroup } from "react-bootstrap"
 import { GENRES } from '../../consts/book.constants'
 import { handleNewGenre } from '../../utils/book.utils'
 
@@ -106,7 +106,7 @@ export default function NewBookForm() {
 
                 <h3>Author's information</h3>
 
-                <InputGroup className="mt-3" as={Col} controlId="authorName">
+                <InputGroup className="mt-3" as={Col}>
                     <InputGroup.Text>First and Last Name</InputGroup.Text>
                     <Form.Control
                         type="text"
@@ -124,7 +124,7 @@ export default function NewBookForm() {
 
                 <hr />
 
-                <Form.Group as={Col} controlId="authorCountry">
+                <Form.Group as={Col}>
                     <Form.Control
                         type="text"
                         placeholder="Which country is the author from?"
@@ -133,7 +133,7 @@ export default function NewBookForm() {
                         name={'country'} />
                 </Form.Group>
 
-                <Form.Group as={Col} controlId="authorBirth">
+                <Form.Group as={Col}>
                     <Form.Control
                         type="number"
                         placeholder="When were they born?"
@@ -161,7 +161,7 @@ export default function NewBookForm() {
             </div>
 
 
-            <Form.Group as={Col} controlId="publisher">
+            <Form.Group as={Col}>
                 <Form.Label>Publisher</Form.Label>
                 <Form.Control
                     type="text"
@@ -171,7 +171,7 @@ export default function NewBookForm() {
                     name={'publisher'} />
             </Form.Group>
 
-            <Form.Group as={Col} controlId="year">
+            <Form.Group as={Col}>
                 <Form.Label>Year</Form.Label>
                 <Form.Control
                     type="number"
@@ -182,7 +182,7 @@ export default function NewBookForm() {
             </Form.Group>
 
 
-            <Form.Group className="mb-3" controlId="description">
+            <Form.Group className="mb-3">
                 <Form.Label>Description</Form.Label>
                 <Form.Control
                     type='text'
@@ -192,7 +192,7 @@ export default function NewBookForm() {
                     name={'description'} />
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="cover">
+            <Form.Group className="mb-3">
                 <Form.Label>Cover</Form.Label>
                 <Form.Control
                     type='text'
@@ -203,7 +203,7 @@ export default function NewBookForm() {
             </Form.Group>
 
 
-            <Form.Group as={Col} controlId="formGridPages">
+            <Form.Group as={Col}>
                 <Form.Label>Pages</Form.Label>
                 <Form.Control
                     type="text"
@@ -213,7 +213,7 @@ export default function NewBookForm() {
                     name={'pages'} />
             </Form.Group>
 
-            <Form.Group as={Col} controlId="language">
+            <Form.Group as={Col}>
                 <Form.Label>Language</Form.Label>
                 <Form.Select
                     defaultValue="Choose..."
@@ -256,7 +256,7 @@ export default function NewBookForm() {
             <h4>Has this book won any awards? Add up to three:</h4>
 
             {[0, 1, 2].map((awardIndex) => (
-                <Form.Group as={Col} controlId={`awards-${awardIndex}`} key={awardIndex}>
+                <Form.Group as={Col} key={awardIndex}>
                     <Form.Control
                         type="text"
                         value={bookData.awards[awardIndex]}
