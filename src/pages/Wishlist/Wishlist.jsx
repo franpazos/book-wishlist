@@ -36,7 +36,7 @@ function Wishlist() {
             {
                 books.map((elm) => {
                     return (
-                        <Col key={elm.id} lg={3} md={6} className="mb-4">
+                        <Col key={elm.id} lg={4} md={6} className="mb-3">
                            <BookCard {...elm} removeCard={removeCard}/>
                         </Col>
                     )

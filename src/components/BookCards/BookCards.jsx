@@ -8,10 +8,9 @@ const BookCard = ({ id, title, cover, author, removeCard }) => {
 
     return (
         <article className="bookCards">
-          <CloseButton variant="top" size="sm" className="closebutton-style" onClick={() => {removeCard(id);
-            }}/>
-             <Link to={`/wishlist/${id}`} className="link-class">
               <Card className="Bookcard h-100">
+            <CloseButton className="btn-close" onClick={() => {removeCard(id)}}/>
+                <Link to={`/wishlist/${id}`} className="link-class">
             <Card.Img variant="top" src={cover} />
             <Card.Body>
               <Card.Title>{title}</Card.Title>
@@ -19,8 +18,8 @@ const BookCard = ({ id, title, cover, author, removeCard }) => {
                 by {name} {lastName}
               </Card.Text>
             </Card.Body>
+            </Link>
           </Card>
-          </Link>
         </article>
   );
 }
