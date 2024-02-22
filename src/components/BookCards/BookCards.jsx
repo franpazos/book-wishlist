@@ -1,6 +1,7 @@
 import { CloseButton, Card, Button } from "react-bootstrap"
 import "./BookCard.css"
 import { Link } from "react-router-dom"
+import axios from "axios"
 
 const BookCard = ({ id, title, cover, author, removeCard, beenRead, currentlyReading }) => {
 

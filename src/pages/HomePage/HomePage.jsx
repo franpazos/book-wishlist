@@ -10,7 +10,7 @@ const HomePage = () => {
 
     return (
         <div className="homepage">
-            <h1>Add a new book to your Wishlist!</h1>
+            <h1>Welcome to My Book Wishlist</h1>
 
             <Container>
 

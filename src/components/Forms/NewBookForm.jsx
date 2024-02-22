@@ -89,9 +89,9 @@ export default function NewBookForm() {
     }
 
     return (
-
+    <div className="NewBookForm">
         <Form className='form' onSubmit={handleAddBook}>
-
+            <div className='title'>
             <Form.Group className="mb-5" controlId="title">
                 <Form.Label className='title'>Title</Form.Label>
                 <Form.Control
@@ -101,6 +101,7 @@ export default function NewBookForm() {
                     name={'title'}
                     placeholder="What is the title of the book?" />
             </Form.Group>
+            </div>
 
             <div className='author-details'>
 
@@ -146,7 +147,7 @@ export default function NewBookForm() {
 
                 <Row className="mb-2">
 
-                    <Col md={{ span: 4, offset: 4 }}>
+                    <Col md={{ span: 5, offset: 4 }}>
                         <Form.Check
                             label="Did they win a Nobel Prize?"
                             type="switch"
@@ -160,7 +161,7 @@ export default function NewBookForm() {
 
             </div>
 
-
+            <div className='other-details'>
             <Form.Group as={Col}>
                 <Form.Label>Publisher</Form.Label>
                 <Form.Control
@@ -228,9 +229,9 @@ export default function NewBookForm() {
 
                 </Form.Select>
             </Form.Group>
+            </div>
 
-
-
+            <div className='genres'>
             <h4>Choose all the genres it belongs to:</h4>
 
             <Form.Group className="mb-3" controlId="genres">
@@ -251,7 +252,9 @@ export default function NewBookForm() {
                 }
 
             </Form.Group>
+            </div>
 
+            <div className='awards'>
 
             <h4>Has this book won any awards? Add up to three:</h4>
 
@@ -266,13 +269,14 @@ export default function NewBookForm() {
                 </Form.Group>
             ))}
 
+            </div>
 
-            <Button variant="success" size="lg" type="submit">
+            <Button className="submit-btn" size="sm" type="submit">
                 Add new book
             </Button>
 
         </Form >
-
+     </div>
     )
 
 }
