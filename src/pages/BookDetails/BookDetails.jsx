@@ -21,7 +21,7 @@ const BookDetails = () => {
 
     const { bookId } = useParams()
 
-    useEffect(() => loadBookDetails(), [{ bookId }])
+    useEffect(() => loadBookDetails(), [])
     useEffect(() => {
         !isLoading && updateBookStatus()
     }, [book?.currentlyReading, book?.beenRead])
@@ -215,6 +215,7 @@ const BookDetails = () => {
 
                         </Col>
                         <div className="offcanvas">
+
                             <Offcanvas placement="end" show={showOffCanvas} onHide={handleCloseOffCanvas}>
                                 <Offcanvas.Header className="header-offcanvas" closeButton>
                                     <Offcanvas.Title>Author Details</Offcanvas.Title>
