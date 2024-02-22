@@ -32,7 +32,7 @@ const NavBar = () => {
                             <Nav.Link className='links' href="/wishlist">My Wishlist</Nav.Link>
                             <Nav.Link className='links' href="/add-book">Add Book</Nav.Link>
                         </Nav>
-                        <SearchBar/>
+                        <SearchBar />
                     </Offcanvas.Body>
                 </Navbar.Offcanvas>
             </Container>
