@@ -2,7 +2,7 @@ import "./BookDetails.css"
 import { useState, useEffect } from "react"
 import axios from "axios"
 import { useParams } from "react-router-dom"
-import { Container, Row, Col, Image, ButtonGroup, Button } from "react-bootstrap"
+import { Container, Row, Col, Image, ButtonGroup, Button, Badge } from "react-bootstrap"
 import DeleteModal from "../../components/Modals/DeleteModal"
 import ReviewModal from "../../components/Modals/ReviewModal"
 import StarRatings from "react-star-ratings"
@@ -22,7 +22,7 @@ const BookDetails = () => {
     useEffect(() => loadBookDetails(), [])
     useEffect(() => {
         !isLoading && updateBookStatus()
-    }, [book.currentlyReading, book.beenRead])
+    }, [book?.currentlyReading, book?.beenRead])
 
     const loadBookDetails = () => {
         axios
@@ -43,14 +43,17 @@ const BookDetails = () => {
         }))
     }
 
-    const updateBookStatus = () => {
-        axios
-            .put(`${API_BASE_URL}/wishlist/${bookId}`, book)
-            .then(() => console.log('ACTUALIZADO'))
-            .catch(err => console.log(err))
-    }
+    const updateBookStatus = async () => {
+        try {
+            await axios.put(`${API_BASE_URL}/wishlist/${bookId}`, book);
+            console.log('ACTUALIZADO');
+        } catch (err) {
+            console.error(err);
+        }
+    };
 
-    const { name, lastName } = book.author || {}
+
+    const { name, lastName, nobelAwarded } = book.author || {}
     const { publisher, year } = book.publishSpecs || {}
     const { rating, comment } = book.reviewData || {}
 
@@ -63,7 +66,7 @@ const BookDetails = () => {
                 <Col xs={6} md={4}>
                     <Image src={book.cover} alt="Book Cover" thumbnail className="book-cover" />
 
-                    <div className="rating">
+                    <div className="reviewData">
                         <h3>Your rating:</h3>
 
                         <StarRatings
@@ -73,19 +76,35 @@ const BookDetails = () => {
                             name="rating"
                             starDimension="22px"
                         />
+
+                        {comment && comment.length > 0 && (
+                            <div>
+                                <h3 className="mt-4">
+                                    Your review:
+                                </h3>
+                                <p className="comment">
+                                    "{comment}"
+                                </p>
+                            </div>
+                        )}
                     </div>
 
                 </Col>
 
                 <Col md={{ offset: 1 }} className="bookdetails">
 
-                    <h3 className="title">{book.title}</h3>
+                    <h2 className="title">{book.title}</h2>
                     <hr />
-                    <h4 className="author">Written by {name} {lastName}</h4>
+                    <h3 className="mt-3, mb-3">Written by {name} {lastName}</h3>
                     <p className="description">{book.description}</p>
-                    <p>Language: {book.language}</p>
-                    <p className="pages">Pages: {book.pages}</p>
-                    <p>Published by {publisher} in {year}</p>
+                    <p className="">Published by {publisher} in {year}</p>
+
+                    <Row>
+
+                        <Col><p><strong>Pages:</strong> {book.pages}</p></Col>
+                        <Col><p><strong>Language:</strong> {book.language}</p></Col>
+
+                    </Row>
 
                     <Row>
                         <Col>
@@ -123,7 +142,7 @@ const BookDetails = () => {
 
                     <Row className="mt-5">
 
-                        <Col md={{ span: 6 }}>
+                        <Col md={{ span: 5 }}>
 
                             <ButtonGroup>
 
@@ -149,19 +168,20 @@ const BookDetails = () => {
 
                         </Col>
 
-                        <Col>
+                        <Col md={{ span: 5 }}>
 
-                            <Button
-                                onClick={() => setReviewModalShow(true)}
-                                size="lg"
-                                style={
-                                    {
+                            {book.beenRead && (
+                                <Button
+                                    onClick={() => setReviewModalShow(true)}
+                                    size="lg"
+                                    style={{
                                         backgroundColor: '#638889',
                                         borderColor: '#638889'
-                                    }
-                                }>
-                                Write a review!
-                            </Button>
+                                    }}>
+                                    Write a review!
+                                </Button>
+                            )}
+
 
                             <ReviewModal
                                 show={reviewModalShow}
@@ -170,11 +190,7 @@ const BookDetails = () => {
 
                         </Col>
 
-                    </Row>
-
-                    <Row className="mt-5">
-
-                        <Col>
+                        <Col md={{ span: 1 }}>
 
                             <Button
                                 variant="danger"
@@ -190,6 +206,12 @@ const BookDetails = () => {
                             />
 
                         </Col>
+
+                    </Row>
+
+                    <Row className="mt-5">
+
+
 
                     </Row>
 

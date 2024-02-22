@@ -46,7 +46,7 @@ export default function NewBookForm() {
 
         axios
             .post(`${API_BASE_URL}/wishlist`, bookData)
-            .then(() => navigate('wishlist'))
+            .then(() => navigate('/wishlist'))
             .catch(err => console.log(err))
     }
 
