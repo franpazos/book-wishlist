@@ -1,22 +1,57 @@
+.NewBookForm{
+    display: flex;
+    justify-content: center;
+}
 
 .form {
     box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px, #11111a1a 0px 24px 80px;   
     border-radius: 15px;
     padding: 50px;
-    font-size: 1.3em;
+    font-size: 1.2em;
     color: #638889;
+    font-family: sans-serif;
+    width: 80%;
+    margin: 20px 0px;
+    text-align: center;
 }
 
-.title {
-    font-size: 1.5em;
+.form .title {
+    font-size: 1.2em;
     text-align: center;
 }
 
 .author-details {
-
-    border-radius: 5px;
-    padding: 20px;
     text-align: center;
-    margin: 30px auto;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    font-size: 1em;
+    padding: 10px 0px;
+}
+
+.other-details{
+    font-size: 1em;
+    padding: 10px 0px;
+    text-align: left;
+}
+
+.genres{
+    font-size: 1em;
+    padding: 20px 0px;
+    text-align: left;
+}
+
+.awards {
+    font-size: 1em;
+    text-align: left;
+}
+
+.form .submit-btn{
+    background-color: #638889;
+    border-color: #638889;
+    width: 60%;
+    margin-top: 20px
+}
+
+.form .submit-btn:hover {
+    background-color: #F9EFDB;
+    border-color: #638889;
+    color: #638889;
 }
