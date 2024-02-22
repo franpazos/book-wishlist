@@ -18,7 +18,7 @@ const NavBar = () => {
 
         <Navbar expand={expand} className="bg-body-light mb-3">
             <Container fluid>
-                <Navbar.Brand className="img-logo" href="./">
+                <Navbar.Brand className="img-logo" href="/">
                     <img src={logo} alt="Web's Logo" />
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />

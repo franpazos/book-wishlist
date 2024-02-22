@@ -19,7 +19,7 @@ const SearchBar = () => {
     const fetchResults = value => {
         axios
             .get(`${API_BASE_URL}/wishlist?title_like=${value}`)
-            .then(({data}) => setResults(data))
+            .then(({data}) => (setResults(data)))
             .catch(err => console.log(err))
     }
     
