@@ -6,6 +6,7 @@ import { Container, Row, Col, Image, ButtonGroup, Button, Offcanvas } from "reac
 import DeleteModal from "../../components/Modals/DeleteModal"
 import ReviewModal from "../../components/Modals/ReviewModal"
 import StarRatings from "react-star-ratings"
+import nobelPrize from "../../assets/nobelprize.png"
 
 const API_BASE_URL = "http://localhost:5005"
 
@@ -154,7 +155,7 @@ const BookDetails = () => {
 
                                 <Button
                                     variant={book.currentlyReading ? 'success' : 'secondary'}
-                                    size="lg"
+                                    size="mm"
                                     name="currentlyReading"
                                     onClick={handleReadingStatus}
                                 >
@@ -163,7 +164,7 @@ const BookDetails = () => {
 
                                 <Button
                                     variant={book.beenRead ? 'success' : 'secondary'}
-                                    size="lg"
+                                    size="mm"
                                     name="beenRead"
                                     onClick={handleReadingStatus}
                                 >
@@ -179,7 +180,7 @@ const BookDetails = () => {
                             {book.beenRead && (
                                 <Button
                                     onClick={() => setReviewModalShow(true)}
-                                    size="lg"
+                                    size="mm"
                                     style={{
                                         backgroundColor: '#638889',
                                         borderColor: '#638889'
@@ -201,7 +202,7 @@ const BookDetails = () => {
 
                             <Button
                                 variant="danger"
-                                size="lg"
+                                size="mm"
                                 onClick={() => setModalShow(true)}>
                                 Delete
                             </Button>
@@ -228,7 +229,7 @@ const BookDetails = () => {
 
                                         {nobelAwarded === true && (
                                             <div>
-                                                <img src="./../../assets/nobelprize.png" alt="Nobel Prize badge" />
+                                                <img src={nobelPrize} alt="Nobel Prize badge" />
                                                 <h5>{name} {lastName} is a Nobel Prize winner!</h5>
                                             </div>
 

@@ -51,9 +51,15 @@ export default function NewBookForm() {
     }
 
     const handleInputChange = e => {
-        const { value, name } = e.target
-        setBookData({ ...bookData, [name]: value })
+        const { value, name } = e.target;
+
+        if (name === 'language') {
+            setBookData({ ...bookData, language: value });
+        } else {
+            setBookData({ ...bookData, [name]: value });
+        }
     }
+
 
     const handleAuthorDetailsChange = e => {
         const { value, name, checked } = e.target
@@ -89,194 +95,195 @@ export default function NewBookForm() {
     }
 
     return (
-    <div className="NewBookForm">
-        <Form className='form' onSubmit={handleAddBook}>
-            <div className='title'>
-            <Form.Group className="mb-5" controlId="title">
-                <Form.Label className='title'>Title</Form.Label>
-                <Form.Control
-                    type="text"
-                    value={bookData.title}
-                    onChange={handleInputChange}
-                    name={'title'}
-                    placeholder="What is the title of the book?" />
-            </Form.Group>
-            </div>
+        <div className="NewBookForm">
+            <Form className='form' onSubmit={handleAddBook}>
+                <div className='title'>
+                    <Form.Group className="mb-5" controlId="title">
+                        <Form.Label className='title'>Title</Form.Label>
+                        <Form.Control
+                            type="text"
+                            value={bookData.title}
+                            onChange={handleInputChange}
+                            name={'title'}
+                            placeholder="What is the title of the book?" />
+                    </Form.Group>
+                </div>
 
-            <div className='author-details'>
+                <div className='author-details'>
 
-                <h3>Author's information</h3>
+                    <h3>Author's information</h3>
 
-                <InputGroup className="mt-3" as={Col}>
-                    <InputGroup.Text>First and Last Name</InputGroup.Text>
-                    <Form.Control
-                        type="text"
-                        aria-label="First name"
-                        value={bookData.author.name}
-                        onChange={handleAuthorDetailsChange}
-                        name={'name'} />
-                    <Form.Control
-                        type="text"
-                        aria-label="Last name"
-                        value={bookData.author.lastName}
-                        onChange={handleAuthorDetailsChange}
-                        name={'lastName'} />
-                </InputGroup>
-
-                <hr />
-
-                <Form.Group as={Col}>
-                    <Form.Control
-                        type="text"
-                        placeholder="Which country is the author from?"
-                        value={bookData.author.country}
-                        onChange={handleAuthorDetailsChange}
-                        name={'country'} />
-                </Form.Group>
-
-                <Form.Group as={Col}>
-                    <Form.Control
-                        type="number"
-                        placeholder="When were they born?"
-                        value={bookData.author.birth}
-                        onChange={handleAuthorDetailsChange}
-                        name={'birth'} />
-                </Form.Group>
-
-                <hr />
-
-                <Row className="mb-2">
-
-                    <Col md={{ span: 5, offset: 4 }}>
-                        <Form.Check
-                            label="Did they win a Nobel Prize?"
-                            type="switch"
-                            id="nobel-switch"
-                            value={bookData.author.nobelAwarded}
+                    <InputGroup className="mt-3" as={Col}>
+                        <InputGroup.Text>First and Last Name</InputGroup.Text>
+                        <Form.Control
+                            type="text"
+                            aria-label="First name"
+                            value={bookData.author.name}
                             onChange={handleAuthorDetailsChange}
-                            name={'nobelAwarded'} />
-                    </Col>
+                            name={'name'} />
+                        <Form.Control
+                            type="text"
+                            aria-label="Last name"
+                            value={bookData.author.lastName}
+                            onChange={handleAuthorDetailsChange}
+                            name={'lastName'} />
+                    </InputGroup>
 
-                </Row>
+                    <hr />
 
-            </div>
+                    <Form.Group as={Col}>
+                        <Form.Control
+                            type="text"
+                            placeholder="Which country is the author from?"
+                            value={bookData.author.country}
+                            onChange={handleAuthorDetailsChange}
+                            name={'country'} />
+                    </Form.Group>
 
-            <div className='other-details'>
-            <Form.Group as={Col}>
-                <Form.Label>Publisher</Form.Label>
-                <Form.Control
-                    type="text"
-                    placeholder="Who published your edition?"
-                    value={bookData.publishSpecs.publisher}
-                    onChange={handlePublishSpecsChange}
-                    name={'publisher'} />
-            </Form.Group>
+                    <Form.Group as={Col}>
+                        <Form.Control
+                            type="number"
+                            placeholder="When were they born?"
+                            value={bookData.author.birth}
+                            onChange={handleAuthorDetailsChange}
+                            name={'birth'} />
+                    </Form.Group>
 
-            <Form.Group as={Col}>
-                <Form.Label>Year</Form.Label>
-                <Form.Control
-                    type="number"
-                    placeholder="What year was the book published?"
-                    value={bookData.publishSpecs.year}
-                    onChange={handlePublishSpecsChange}
-                    name={'year'} />
-            </Form.Group>
+                    <hr />
+
+                    <Row className="mb-2">
+
+                        <Col md={{ span: 5, offset: 4 }}>
+                            <Form.Check
+                                label="Did they win a Nobel Prize?"
+                                type="switch"
+                                id="nobel-switch"
+                                value={bookData.author.nobelAwarded}
+                                onChange={handleAuthorDetailsChange}
+                                name={'nobelAwarded'} />
+                        </Col>
+
+                    </Row>
+
+                </div>
+
+                <div className='other-details'>
+                    <Form.Group as={Col}>
+                        <Form.Label>Publisher</Form.Label>
+                        <Form.Control
+                            type="text"
+                            placeholder="Who published your edition?"
+                            value={bookData.publishSpecs.publisher}
+                            onChange={handlePublishSpecsChange}
+                            name={'publisher'} />
+                    </Form.Group>
+
+                    <Form.Group as={Col}>
+                        <Form.Label>Year</Form.Label>
+                        <Form.Control
+                            type="number"
+                            placeholder="What year was the book published?"
+                            value={bookData.publishSpecs.year}
+                            onChange={handlePublishSpecsChange}
+                            name={'year'} />
+                    </Form.Group>
 
 
-            <Form.Group className="mb-3">
-                <Form.Label>Description</Form.Label>
-                <Form.Control
-                    type='text'
-                    placeholder="Add a description of the book"
-                    value={bookData.description}
-                    onChange={handleInputChange}
-                    name={'description'} />
-            </Form.Group>
+                    <Form.Group className="mb-3">
+                        <Form.Label>Description</Form.Label>
+                        <Form.Control
+                            type='text'
+                            placeholder="Add a description of the book"
+                            value={bookData.description}
+                            onChange={handleInputChange}
+                            name={'description'} />
+                    </Form.Group>
 
-            <Form.Group className="mb-3">
-                <Form.Label>Cover</Form.Label>
-                <Form.Control
-                    type='text'
-                    placeholder="Enter URL of book cover"
-                    value={bookData.cover}
-                    onChange={handleInputChange}
-                    name={'cover'} />
-            </Form.Group>
+                    <Form.Group className="mb-3">
+                        <Form.Label>Cover</Form.Label>
+                        <Form.Control
+                            type='text'
+                            placeholder="Enter URL of book cover"
+                            value={bookData.cover}
+                            onChange={handleInputChange}
+                            name={'cover'} />
+                    </Form.Group>
 
 
-            <Form.Group as={Col}>
-                <Form.Label>Pages</Form.Label>
-                <Form.Control
-                    type="text"
-                    placeholder="Number of pages"
-                    value={bookData.pages}
-                    onChange={handleInputChange}
-                    name={'pages'} />
-            </Form.Group>
+                    <Form.Group as={Col}>
+                        <Form.Label>Pages</Form.Label>
+                        <Form.Control
+                            type="text"
+                            placeholder="Number of pages"
+                            value={bookData.pages}
+                            onChange={handleInputChange}
+                            name={'pages'} />
+                    </Form.Group>
 
-            <Form.Group as={Col}>
-                <Form.Label>Language</Form.Label>
-                <Form.Select
-                    defaultValue="Choose..."
-                    value={bookData.language}
-                    onChange={handleInputChange}
-                    name={'language'} >
+                    <Form.Group as={Col}>
+                        <Form.Label>Language</Form.Label>
+                        <Form.Select
+                            defaultValue="Choose..."
+                            value={bookData.language}
+                            onChange={handleInputChange}
+                            name={'language'} >
 
-                    <option>Spanish</option>
-                    <option>English</option>
-                    <option>Italian</option>
-                    <option>French</option>
+                            <option>Choose language</option>
+                            <option>Spanish</option>
+                            <option>English</option>
+                            <option>Italian</option>
+                            <option>French</option>
 
-                </Form.Select>
-            </Form.Group>
-            </div>
+                        </Form.Select>
+                    </Form.Group>
+                </div>
 
-            <div className='genres'>
-            <h4>Choose all the genres it belongs to:</h4>
+                <div className='genres'>
+                    <h4>Choose all the genres it belongs to:</h4>
 
-            <Form.Group className="mb-3" controlId="genres">
+                    <Form.Group className="mb-3" controlId="genres">
 
-                {
-                    GENRES.map((genre, index) => (
-                        <Form.Check
-                            key={index}
-                            inline
-                            type="checkbox"
-                            label={genre.label}
-                            name={genre.name}
-                            id={`inline-checkbox-${index}`}
-                            value={bookData.genres.includes(genre.name)}
-                            onChange={handleGenreChange}
-                        />
-                    ))
-                }
+                        {
+                            GENRES.map((genre, index) => (
+                                <Form.Check
+                                    key={index}
+                                    inline
+                                    type="checkbox"
+                                    label={genre.label}
+                                    name={genre.name}
+                                    id={`inline-checkbox-${index}`}
+                                    value={bookData.genres.includes(genre.name)}
+                                    onChange={handleGenreChange}
+                                />
+                            ))
+                        }
 
-            </Form.Group>
-            </div>
+                    </Form.Group>
+                </div>
 
-            <div className='awards'>
+                <div className='awards'>
 
-            <h4>Has this book won any awards? Add up to three:</h4>
+                    <h4>Has this book won any awards? Add up to three:</h4>
 
-            {[0, 1, 2].map((awardIndex) => (
-                <Form.Group as={Col} key={awardIndex}>
-                    <Form.Control
-                        type="text"
-                        value={bookData.awards[awardIndex]}
-                        onChange={(e) => handleAwardsChange(e, awardIndex)}
-                        name={`awards-${awardIndex}`}
-                    />
-                </Form.Group>
-            ))}
+                    {[0, 1, 2].map((awardIndex) => (
+                        <Form.Group as={Col} key={awardIndex}>
+                            <Form.Control
+                                type="text"
+                                value={bookData.awards[awardIndex]}
+                                onChange={(e) => handleAwardsChange(e, awardIndex)}
+                                name={`awards-${awardIndex}`}
+                            />
+                        </Form.Group>
+                    ))}
 
-            </div>
+                </div>
 
-            <Button className="submit-btn" size="sm" type="submit">
-                Add new book
-            </Button>
+                <Button className="submit-btn" size="sm" type="submit">
+                    Add new book
+                </Button>
 
-        </Form >
-     </div>
+            </Form >
+        </div>
     )
 
 }
