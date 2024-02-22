@@ -20,7 +20,7 @@ function Wishlist() {
 
     const removeCard = (idToDelete) => {
         axios
-            .delete(`${API_BASE_URL}/${idToDelete}`)
+            .delete(`${API_BASE_URL}/wishlist/${idToDelete}`)
             .then(() => {
                 const filteredBooks = books.filter(elm => elm.id !== idToDelete);
                 setBooks(filteredBooks);
