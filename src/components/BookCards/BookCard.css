@@ -19,12 +19,9 @@
     padding: 10px;
 }
 
-.Bookcard .card-title {
-    font-size:larger;
-}
-
 .Bookcard .card-text {
     font-style: italic;
+    font-size: smaller;
 }
 
 .author-read{

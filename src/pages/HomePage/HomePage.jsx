@@ -3,21 +3,14 @@ import axios from "axios"
 import { useState } from 'react'
 import { useNavigate } from "react-router-dom"
 import { Container, Button, Form, Row, Col } from "react-bootstrap"
-import NewBookForm from "../../components/Forms/NewBookForm"
+import Carousel from "./../../components/Carousel/Carousel"
 
 
 const HomePage = () => {
 
     return (
         <div className="homepage">
-            <h1>Welcome to My Book Wishlist</h1>
-
-            <Container>
-
-            </Container>
-
-
-
+            <Carousel/>
         </div>
     )
 }
