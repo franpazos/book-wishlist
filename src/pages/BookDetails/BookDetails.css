@@ -39,3 +39,13 @@ p {
     background-color: #638889;
     border-color: #638889;
 }
+
+.header-offcanvas {
+    background-color: #56787a;
+    color: #F9EFDB;
+}
+
+.body-offcanvas {
+    background-color: #638889;
+    color: #F9EFDB;
+}

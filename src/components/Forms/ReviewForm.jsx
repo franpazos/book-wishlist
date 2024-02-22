@@ -1,32 +1,33 @@
 import { Form, Button } from "react-bootstrap"
 import { useState } from "react"
-import { useNavigate, useParams } from "react-router-dom"
+import { useParams } from "react-router-dom"
 import axios from "axios"
 
 const API_BASE_URL = "http://localhost:5005"
 
-export default function ReviewForm({ book }) {
+export default function ReviewForm({ book, loadBook, closeModal }) {
 
     const [bookData, setBookData] = useState(book)
 
     const { bookId } = useParams()
 
+    const handleAddReview = (e) => {
 
-    const navigate = useNavigate()
-
-    const handleAddReview = async (e) => {
         e.preventDefault()
 
-        try {
-            await axios.put(`${API_BASE_URL}/wishlist/${bookId}`, bookData)
-            props.onHide()
-            navigate(`/wishlist/${bookId}`)
-        } catch (err) {
-            console.log(err)
-        }
+        axios
+            .put(`${API_BASE_URL}/wishlist/${bookId}`, bookData)
+            .then(() => {
+                loadBook()
+                closeModal()
+            })
+            .catch(err => {
+                console.error(err);
+            })
     }
 
-    const handleReviewChange = e => {
+
+    const handleReviewChange = (e) => {
         const { value, name } = e.target;
         setBookData({
             ...bookData,
