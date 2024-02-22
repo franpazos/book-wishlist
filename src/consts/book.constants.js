@@ -17,4 +17,5 @@ export const GENRES = [
     { name: 'Horror', label: 'Horror' },
     { name: 'Romance', label: 'Romance' },
     { name: 'Philosophy', label: 'Philosophy' },
+    { name: 'Psychology', label: 'Psychology' },
 ]

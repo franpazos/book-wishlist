@@ -8,10 +8,10 @@ const API_BASE_URL = "http://localhost:5005"
 
 const SearchBar = () => {
 
-    const [results, setResults] = useState ([])
+    const [results, setResults] = useState([])
 
     const handleQuerySearch = event => {
-        const {value} = event.target
+        const { value } = event.target
 
         value.length > 1 ? fetchResults(value) : setResults([])
     }
@@ -19,27 +19,31 @@ const SearchBar = () => {
     const fetchResults = value => {
         axios
             .get(`${API_BASE_URL}/wishlist?title_like=${value}`)
-            .then(({data}) => setResults(data))
+            .then(({ data }) => setResults(data))
             .catch(err => console.log(err))
     }
-    
-    
-    return(
+
+    const handleResultsClick = () => {
+        setResults([])
+    }
+
+
+    return (
         <div className="SearchBar">
             <Form>
                 <Form.Control
-                type="text"
-                placeholder="Search..."
-                onKeyUp={handleQuerySearch}
-                />        
+                    type="text"
+                    placeholder="Search..."
+                    onKeyUp={handleQuerySearch}
+                />
             </Form>
             <ListGroup className="ListGroup">
                 {
                     results.map(elm => {
                         return (
-                            <Link key={elm.id} to={`/wishlist/${elm.id}`}  className="link-style">
+                            <Link key={elm.id} to={`/wishlist/${elm.id}`} className="link-style" onClick={handleResultsClick}>
                                 <ListGroup.Item>
-                                <div  className="img-title"><img src={elm.cover} alt="book-img"/>{elm.title}</div>
+                                    <div className="img-title"><img src={elm.cover} alt="book-img" />{elm.title}</div>
                                 </ListGroup.Item>
                             </Link>
                         )
@@ -47,7 +51,7 @@ const SearchBar = () => {
                 }
             </ListGroup>
         </div>
-)
+    )
 }
 
 export default SearchBar

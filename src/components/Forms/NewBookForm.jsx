@@ -109,6 +109,8 @@ export default function NewBookForm() {
                     </Form.Group>
                 </div>
 
+                <hr />
+
                 <div className='author-details'>
 
                     <h3>Author's information</h3>
@@ -129,29 +131,32 @@ export default function NewBookForm() {
                             name={'lastName'} />
                     </InputGroup>
 
-                    <hr />
+                    <Row className='mt-4'>
 
-                    <Form.Group as={Col}>
-                        <Form.Control
-                            type="text"
-                            placeholder="Which country is the author from?"
-                            value={bookData.author.country}
-                            onChange={handleAuthorDetailsChange}
-                            name={'country'} />
-                    </Form.Group>
+                        <Col>
+                            <Form.Group as={Col}>
+                                <Form.Control
+                                    type="text"
+                                    placeholder="Which country is the author from?"
+                                    value={bookData.author.country}
+                                    onChange={handleAuthorDetailsChange}
+                                    name={'country'} />
+                            </Form.Group>
+                        </Col>
+                        <Col>
+                            <Form.Group as={Col}>
+                                <Form.Control
+                                    type="number"
+                                    placeholder="When were they born?"
+                                    value={bookData.author.birth}
+                                    onChange={handleAuthorDetailsChange}
+                                    name={'birth'} />
+                            </Form.Group>
+                        </Col>
 
-                    <Form.Group as={Col}>
-                        <Form.Control
-                            type="number"
-                            placeholder="When were they born?"
-                            value={bookData.author.birth}
-                            onChange={handleAuthorDetailsChange}
-                            name={'birth'} />
-                    </Form.Group>
+                    </Row>
 
-                    <hr />
-
-                    <Row className="mb-2">
+                    <Row className="mb-2, mt-3">
 
                         <Col md={{ span: 5, offset: 4 }}>
                             <Form.Check
@@ -165,29 +170,36 @@ export default function NewBookForm() {
 
                     </Row>
 
+                    <hr />
+
                 </div>
 
                 <div className='other-details'>
-                    <Form.Group as={Col}>
-                        <Form.Label>Publisher</Form.Label>
-                        <Form.Control
-                            type="text"
-                            placeholder="Who published your edition?"
-                            value={bookData.publishSpecs.publisher}
-                            onChange={handlePublishSpecsChange}
-                            name={'publisher'} />
-                    </Form.Group>
+                    <Row className='mb-3'>
+                        <Col>
+                            <Form.Group>
+                                <Form.Label>Publisher</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    placeholder="Who published your edition?"
+                                    value={bookData.publishSpecs.publisher}
+                                    onChange={handlePublishSpecsChange}
+                                    name={'publisher'} />
+                            </Form.Group>
+                        </Col>
 
-                    <Form.Group as={Col}>
-                        <Form.Label>Year</Form.Label>
-                        <Form.Control
-                            type="number"
-                            placeholder="What year was the book published?"
-                            value={bookData.publishSpecs.year}
-                            onChange={handlePublishSpecsChange}
-                            name={'year'} />
-                    </Form.Group>
-
+                        <Col>
+                            <Form.Group>
+                                <Form.Label>Year</Form.Label>
+                                <Form.Control
+                                    type="number"
+                                    placeholder="What year was the book published?"
+                                    value={bookData.publishSpecs.year}
+                                    onChange={handlePublishSpecsChange}
+                                    name={'year'} />
+                            </Form.Group>
+                        </Col>
+                    </Row>
 
                     <Form.Group className="mb-3">
                         <Form.Label>Description</Form.Label>
@@ -209,33 +221,46 @@ export default function NewBookForm() {
                             name={'cover'} />
                     </Form.Group>
 
+                    <Row>
 
-                    <Form.Group as={Col}>
-                        <Form.Label>Pages</Form.Label>
-                        <Form.Control
-                            type="text"
-                            placeholder="Number of pages"
-                            value={bookData.pages}
-                            onChange={handleInputChange}
-                            name={'pages'} />
-                    </Form.Group>
+                        <Col>
 
-                    <Form.Group as={Col}>
-                        <Form.Label>Language</Form.Label>
-                        <Form.Select
-                            defaultValue="Choose..."
-                            value={bookData.language}
-                            onChange={handleInputChange}
-                            name={'language'} >
+                            <Form.Group as={Col}>
+                                <Form.Label>Pages</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    placeholder="Number of pages"
+                                    value={bookData.pages}
+                                    onChange={handleInputChange}
+                                    name={'pages'} />
+                            </Form.Group>
 
-                            <option>Choose language</option>
-                            <option>Spanish</option>
-                            <option>English</option>
-                            <option>Italian</option>
-                            <option>French</option>
+                        </Col>
 
-                        </Form.Select>
-                    </Form.Group>
+                        <Col>
+
+                            <Form.Group as={Col}>
+                                <Form.Label>Language</Form.Label>
+                                <Form.Select
+                                    defaultValue="Choose..."
+                                    value={bookData.language}
+                                    onChange={handleInputChange}
+                                    name={'language'} >
+
+                                    <option>Choose language</option>
+                                    <option>Spanish</option>
+                                    <option>English</option>
+                                    <option>Italian</option>
+                                    <option>French</option>
+
+                                </Form.Select>
+                            </Form.Group>
+
+                        </Col>
+                    </Row>
+
+
+
                 </div>
 
                 <div className='genres'>
