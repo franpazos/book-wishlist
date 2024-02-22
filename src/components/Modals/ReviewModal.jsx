@@ -4,7 +4,7 @@ import ReviewForm from "./../Forms/ReviewForm"
 
 export default function ReviewModal(props) {
 
-    const { book } = props
+    const { book, loadBook, closeModal } = props
 
 
     return (
@@ -24,7 +24,9 @@ export default function ReviewModal(props) {
             <Modal.Body>
                 <ReviewForm
                     book={book}
-                    onHide={props.onHide} />
+                    closeModal={closeModal}
+                    loadBook={loadBook}
+                />
             </Modal.Body>
         </Modal>
     )

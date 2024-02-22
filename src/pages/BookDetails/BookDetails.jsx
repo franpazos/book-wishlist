@@ -2,7 +2,7 @@ import "./BookDetails.css"
 import { useState, useEffect } from "react"
 import axios from "axios"
 import { useParams } from "react-router-dom"
-import { Container, Row, Col, Image, ButtonGroup, Button, Badge } from "react-bootstrap"
+import { Container, Row, Col, Image, ButtonGroup, Button, Offcanvas } from "react-bootstrap"
 import DeleteModal from "../../components/Modals/DeleteModal"
 import ReviewModal from "../../components/Modals/ReviewModal"
 import StarRatings from "react-star-ratings"
@@ -16,6 +16,7 @@ const BookDetails = () => {
     const [isLoading, setIsLoading] = useState(true)
     const [modalShow, setModalShow] = useState(false)
     const [reviewModalShow, setReviewModalShow] = useState(false)
+    const [showOffCanvas, setShowOffCanvas] = useState(false)
 
     const { bookId } = useParams()
 
@@ -45,15 +46,17 @@ const BookDetails = () => {
 
     const updateBookStatus = async () => {
         try {
-            await axios.put(`${API_BASE_URL}/wishlist/${bookId}`, book);
-            console.log('ACTUALIZADO');
+            await axios.put(`${API_BASE_URL}/wishlist/${bookId}`, book)
+            console.log('ACTUALIZADO')
         } catch (err) {
-            console.error(err);
+            console.error(err)
         }
-    };
+    }
 
+    const handleShowOffCanvas = () => setShowOffCanvas(true)
+    const handleCloseOffCanvas = () => setShowOffCanvas(false)
 
-    const { name, lastName, nobelAwarded } = book.author || {}
+    const { name, lastName, nobelAwarded, country, birth } = book.author || {}
     const { publisher, year } = book.publishSpecs || {}
     const { rating, comment } = book.reviewData || {}
 
@@ -95,7 +98,10 @@ const BookDetails = () => {
 
                     <h2 className="title">{book.title}</h2>
                     <hr />
-                    <h3 className="mt-3, mb-3">Written by {name} {lastName}</h3>
+                    <h3
+                        className="mt-3, mb-3"
+                        onClick={handleShowOffCanvas}>
+                        Written by {name} {lastName}</h3>
                     <p className="description">{book.description}</p>
                     <p className="">Published by {publisher} in {year}</p>
 
@@ -185,7 +191,8 @@ const BookDetails = () => {
 
                             <ReviewModal
                                 show={reviewModalShow}
-                                onHide={() => setReviewModalShow(false)}
+                                closeModal={() => setReviewModalShow(false)}
+                                loadBook={loadBookDetails}
                                 book={book} />
 
                         </Col>
@@ -206,12 +213,34 @@ const BookDetails = () => {
                             />
 
                         </Col>
+                        <div className="offcanvas">
+                            <Offcanvas placement="end" show={showOffCanvas} onHide={handleCloseOffCanvas}>
+                                <Offcanvas.Header className="header-offcanvas" closeButton>
+                                    <Offcanvas.Title>Author Details</Offcanvas.Title>
+                                </Offcanvas.Header>
+                                <Offcanvas.Body className="body-offcanvas">
+                                    <div>
+                                        <h3>{name} {lastName}</h3>
+                                        <hr />
+                                        <p>
+                                            {name} {lastName} was born in {country} in {birth}
+                                        </p>
 
-                    </Row>
+                                        {nobelAwarded === true && (
+                                            <div>
+                                                <img src="./../../assets/nobelprize.png" alt="Nobel Prize badge" />
+                                                <h5>{name} {lastName} is a Nobel Prize winner!</h5>
+                                            </div>
 
-                    <Row className="mt-5">
+
+                                        )}
+
+                                    </div>
 
 
+                                </Offcanvas.Body>
+                            </Offcanvas>
+                        </div>
 
                     </Row>
 
