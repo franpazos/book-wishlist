@@ -6,7 +6,7 @@ import { Button, Form, Row, Col, InputGroup } from "react-bootstrap"
 import { GENRES } from '../../consts/book.constants'
 import { handleNewGenre } from '../../utils/book.utils'
 
-const API_BASE_URL = "http://localhost:5005"
+const API_BASE_URL = "https://mybookwishlist-api.fly.dev"
 
 
 export default function NewBookForm() {

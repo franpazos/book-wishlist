@@ -4,7 +4,7 @@ import BookCard from "../../components/BookCards/BookCards"
 import { Row, Col, Container } from "react-bootstrap";
 import "./Wishlist.css"
 
-const API_BASE_URL = "http://localhost:5005"
+const API_BASE_URL = "https://mybookwishlist-api.fly.dev"
 
 function Wishlist() {
     const [books, setBooks] = useState([])

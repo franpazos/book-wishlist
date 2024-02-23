@@ -8,7 +8,7 @@ import ReviewModal from "../../components/Modals/ReviewModal"
 import StarRatings from "react-star-ratings"
 import nobelPrize from "../../assets/nobelprize.png"
 
-const API_BASE_URL = "http://localhost:5005"
+const API_BASE_URL = "https://mybookwishlist-api.fly.dev"
 
 
 const BookDetails = () => {

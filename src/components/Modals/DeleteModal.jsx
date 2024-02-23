@@ -3,7 +3,7 @@ import axios from "axios"
 import { useNavigate } from "react-router-dom"
 
 
-const API_BASE_URL = "http://localhost:5005"
+const API_BASE_URL = "https://mybookwishlist-api.fly.dev"
 
 export default function DeleteModal(props) {
 
