@@ -21,7 +21,10 @@ const BookDetails = () => {
 
     const { bookId } = useParams()
 
-    useEffect(() => loadBookDetails(), [])
+    useEffect(() => {
+        loadBookDetails()
+    }, [bookId])
+
     useEffect(() => {
         !isLoading && updateBookStatus()
     }, [book?.currentlyReading, book?.beenRead])

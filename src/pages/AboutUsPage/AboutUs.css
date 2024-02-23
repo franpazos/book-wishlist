@@ -1,0 +1,34 @@
+
+.aboutUs h1 {
+    font-weight: 500;
+    text-align: center;
+    margin: 40px;
+    padding: 30px;
+    color: #638889;
+    font-weight: bold;
+    box-shadow: rgba(99, 136, 137, 0.4) 0px 5px, rgba(99, 136, 137, 0.3) 0px 10px, rgba(99, 136, 137, 0.2) 0px 15px, rgba(99, 136, 137, 0.1) 0px 20px, rgba(99, 136, 137, 0.05) 0px 25px;
+
+}
+
+.aboutUs img {
+    height: 550px;
+    width: auto;
+}
+
+.fran {
+    display: flex;
+    justify-content: end;
+}
+
+.aboutUs .link {
+    text-decoration: wavy;
+    font-size: 1.2em;
+    text-align: center;
+
+}
+
+.aboutUs .card {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    margin: 10px 50px;
+
+}

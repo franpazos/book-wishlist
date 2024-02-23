@@ -1,17 +1,17 @@
-import './HomePage.css'
-import axios from "axios"
-import { useState } from 'react'
-import { useNavigate } from "react-router-dom"
-import { Container, Button, Form, Row, Col } from "react-bootstrap"
 import Carousel from "./../../components/Carousel/Carousel"
+import { Container } from 'react-bootstrap'
 
 
 const HomePage = () => {
 
     return (
-        <div className="homepage">
-            <Carousel/>
-        </div>
+
+        <Container className="homepage">
+
+            <Carousel />
+
+        </Container>
+
     )
 }
 

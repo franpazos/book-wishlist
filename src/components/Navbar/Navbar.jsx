@@ -31,6 +31,8 @@ const NavBar = () => {
                         <Nav className="justify-content-end flex-grow-1 pe-3">
                             <Nav.Link className='links' href="/wishlist">My Wishlist</Nav.Link>
                             <Nav.Link className='links' href="/add-book">Add Book</Nav.Link>
+                            <Nav.Link className='links' href="/about-us">About Us</Nav.Link>
+
                         </Nav>
                         <SearchBar />
                     </Offcanvas.Body>
