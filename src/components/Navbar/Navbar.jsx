@@ -7,6 +7,7 @@ import SearchBar from './../Searchbar/Searchbar';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Offcanvas from "react-bootstrap/Offcanvas"
+import { Link } from 'react-router-dom';
 
 
 const NavBar = () => {
@@ -29,10 +30,9 @@ const NavBar = () => {
                 >
                     <Offcanvas.Body>
                         <Nav className="justify-content-end flex-grow-1 pe-3">
-                            <Nav.Link className='links' href="/wishlist">My Wishlist</Nav.Link>
-                            <Nav.Link className='links' href="/add-book">Add Book</Nav.Link>
-                            <Nav.Link className='links' href="/about-us">About Us</Nav.Link>
-
+                            <Link to="/wishlist" className='links nav-link'>My Wishlist</Link>
+                            <Link to="/add-book" className='links nav-link'>Add Book</Link>
+                            <Link to="/about-us" className='links nav-link'>About Us</Link>
                         </Nav>
                         <SearchBar />
                     </Offcanvas.Body>
